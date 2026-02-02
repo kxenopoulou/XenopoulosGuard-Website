@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Μοντέλο ανίχνευσης παραδόξων για κώδικα, εμπνευσμένο από τον Έλληνα φιλόσοφο Επαμεινώνδα Ξενόπουλο.">
+    <meta name="keywords" content="paradox detection, code analysis, philosophy, Xenopoulos">
+    <meta name="author" content="K. Xenopoulos">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="XenopoulosGuard - Ανίχνευση Παραδόξων σε Κώδικα">
+    <meta property="og:description" content="Μοντέλο ανίχνευσης παραδόξων για κώδικα, εμπνευσμένο από τον Έλληνα φιλόσοφο Επαμεινώνδα Ξενόπουλο.">
+    <meta property="og:image" content="./assets/images/og-image.svg">
+    <meta property="og:url" content="https://xenopoulosguard.com">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="el_GR">
+    <meta property="og:locale:alternate" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="XenopoulosGuard - Ανίχνευση Παραδόξων σε Κώδικα">
+    <meta name="twitter:description" content="Μοντέλο ανίχνευσης παραδόξων για κώδικα, εμπνευσμένο από τον Έλληνα φιλόσοφο Επαμεινώνδα Ξενόπουλο.">
+    <meta name="twitter:image" content="./assets/images/og-image.svg">
+    
+    <title>XenopoulosGuard - Ανίχνευση Παραδόξων σε Κώδικα</title>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://orcid.org/0009-0000-1736-8555",
+          "name": "K. Xenopoulos",
+          "url": "https://orcid.org/0009-0000-1736-8555",
+          "image": "./assets/images/portrait.svg",
+          "sameAs": [
+            "https://orcid.org/0009-0000-1736-8555"
+          ]
+        },
+        {
+          "@type": "Product",
+          "name": "XenopoulosGuard",
+          "description": "Paradox-detection model for code; inspired by the Greek philosopher Epameinondas Xenopoulos.",
+          "brand": {
+            "@type": "Brand",
+            "name": "XenopoulosGuard"
+          },
+          "image": "./assets/images/cover.svg",
+          "url": "https://xenopoulosguard.com",
+          "creator": {
+            "@id": "https://orcid.org/0009-0000-1736-8555"
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+        
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .lang-toggle:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        main {
+            background: white;
+            margin: 40px auto;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero img {
+            max-width: 300px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .content {
+            margin: 30px 0;
+        }
+        
+        .content h2 {
+            color: #667eea;
+            margin: 30px 0 15px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .cta {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin: 10px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .orcid-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #A6CE39;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .orcid-link:hover {
+            background: #8bb32d;
+        }
+        
+        .orcid-link img {
+            width: 24px;
+            height: 24px;
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* PayPal Button Container */
+        #paypal-button-container {
+            margin: 30px auto;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="lang-toggle" onclick="toggleLanguage()">
+                <span id="lang-btn">EN</span>
+            </div>
+            <h1>XenopoulosGuard</h1>
+            <p id="header-subtitle">Ανίχνευση Παραδόξων σε Κώδικα</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="hero">
+            <img src="./assets/images/cover.svg" alt="XenopoulosGuard Cover">
+            <h2 id="hero-title">Εμπνευσμένο από τον Έλληνα Φιλόσοφο</h2>
+            <p id="hero-text">Μοντέλο ανίχνευσης παραδόξων για κώδικα, εμπνευσμένο από τον Επαμεινώνδα Ξενόπουλο.</p>
+        </div>
+
+        <div class="content">
+            <section id="about-section">
+                <h2 id="about-title">Σχετικά με το XenopoulosGuard</h2>
+                <p id="about-text">
+                    Το XenopoulosGuard είναι ένα καινοτόμο εργαλείο που συνδυάζει τη φιλοσοφική σκέψη με την ανάλυση κώδικα. 
+                    Εμπνευσμένο από τον Έλληνα φιλόσοφο Επαμεινώνδα Ξενόπουλο, το σύστημα αυτό στοχεύει στην ανίχνευση 
+                    παραδόξων και λογικών ασυνεπειών στον προγραμματιστικό κώδικα.
+                </p>
+            </section>
+
+            <section id="features-section">
+                <h2 id="features-title">Χαρακτηριστικά</h2>
+                <div class="features">
+                    <div class="feature">
+                        <h3 id="feature1-title">Ανίχνευση Παραδόξων</h3>
+                        <p id="feature1-text">Εντοπισμός λογικών αντιφάσεων και παραδόξων στον κώδικα</p>
+                    </div>
+                    <div class="feature">
+                        <h3 id="feature2-title">Φιλοσοφική Προσέγγιση</h3>
+                        <p id="feature2-text">Εφαρμογή φιλοσοφικών αρχών στην ανάλυση λογισμικού</p>
+                    </div>
+                    <div class="feature">
+                        <h3 id="feature3-title">Ελληνική Καινοτομία</h3>
+                        <p id="feature3-text">Βασισμένο σε ελληνική φιλοσοφική παράδοση</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta">
+                <h2 id="cta-title">Υποστηρίξτε το Έργο</h2>
+                <p id="cta-text">Βοηθήστε μας να συνεχίσουμε την ανάπτυξη αυτού του καινοτόμου εργαλείου</p>
+                
+                <!-- PayPal Button -->
+                <div id="paypal-button-container"></div>
+                
+                <div style="margin-top: 20px;">
+                    <a href="https://orcid.org/0009-0000-1736-8555" class="orcid-link" target="_blank" rel="noopener">
+                        <img src="./assets/images/orcid-icon.svg" alt="ORCID iD">
+                        <span id="orcid-text">Προφίλ ORCID</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 XenopoulosGuard. <span id="footer-rights">Με την επιφύλαξη παντός δικαιώματος.</span></p>
+            <p>
+                <a href="privacy.html" id="privacy-link">Πολιτική Απορρήτου</a> | 
+                <a href="terms.html" id="terms-link">Όροι Χρήσης</a> | 
+                <a href="LICENSE">MIT License</a> | 
+                <a href="NOTICE.txt" id="notice-link">Ανακοινώσεις</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR"></script>
+    <script>
+        // PayPal Button Configuration
+        if (window.paypal) {
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: '10.00'
+                            },
+                            description: 'Support XenopoulosGuard Development'
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        window.location.href = 'thank-you.html';
+                    });
+                }
+            }).render('#paypal-button-container');
+        }
+
+        // Bilingual Content
+        const translations = {
+            el: {
+                'lang-btn': 'EN',
+                'header-subtitle': 'Ανίχνευση Παραδόξων σε Κώδικα',
+                'hero-title': 'Εμπνευσμένο από τον Έλληνα Φιλόσοφο',
+                'hero-text': 'Μοντέλο ανίχνευσης παραδόξων για κώδικα, εμπνευσμένο από τον Επαμεινώνδα Ξενόπουλο.',
+                'about-title': 'Σχετικά με το XenopoulosGuard',
+                'about-text': 'Το XenopoulosGuard είναι ένα καινοτόμο εργαλείο που συνδυάζει τη φιλοσοφική σκέψη με την ανάλυση κώδικα. Εμπνευσμένο από τον Έλληνα φιλόσοφο Επαμεινώνδα Ξενόπουλο, το σύστημα αυτό στοχεύει στην ανίχνευση παραδόξων και λογικών ασυνεπειών στον προγραμματιστικό κώδικα.',
+                'features-title': 'Χαρακτηριστικά',
+                'feature1-title': 'Ανίχνευση Παραδόξων',
+                'feature1-text': 'Εντοπισμός λογικών αντιφάσεων και παραδόξων στον κώδικα',
+                'feature2-title': 'Φιλοσοφική Προσέγγιση',
+                'feature2-text': 'Εφαρμογή φιλοσοφικών αρχών στην ανάλυση λογισμικού',
+                'feature3-title': 'Ελληνική Καινοτομία',
+                'feature3-text': 'Βασισμένο σε ελληνική φιλοσοφική παράδοση',
+                'cta-title': 'Υποστηρίξτε το Έργο',
+                'cta-text': 'Βοηθήστε μας να συνεχίσουμε την ανάπτυξη αυτού του καινοτόμου εργαλείου',
+                'orcid-text': 'Προφίλ ORCID',
+                'footer-rights': 'Με την επιφύλαξη παντός δικαιώματος.',
+                'privacy-link': 'Πολιτική Απορρήτου',
+                'terms-link': 'Όροι Χρήσης',
+                'notice-link': 'Ανακοινώσεις'
+            },
+            en: {
+                'lang-btn': 'ΕΛ',
+                'header-subtitle': 'Paradox Detection in Code',
+                'hero-title': 'Inspired by Greek Philosophy',
+                'hero-text': 'Paradox-detection model for code; inspired by the Greek philosopher Epameinondas Xenopoulos.',
+                'about-title': 'About XenopoulosGuard',
+                'about-text': 'XenopoulosGuard is an innovative tool that combines philosophical thinking with code analysis. Inspired by the Greek philosopher Epameinondas Xenopoulos, this system aims to detect paradoxes and logical inconsistencies in programming code.',
+                'features-title': 'Features',
+                'feature1-title': 'Paradox Detection',
+                'feature1-text': 'Identification of logical contradictions and paradoxes in code',
+                'feature2-title': 'Philosophical Approach',
+                'feature2-text': 'Application of philosophical principles to software analysis',
+                'feature3-title': 'Greek Innovation',
+                'feature3-text': 'Based on Greek philosophical tradition',
+                'cta-title': 'Support the Project',
+                'cta-text': 'Help us continue developing this innovative tool',
+                'orcid-text': 'ORCID Profile',
+                'footer-rights': 'All rights reserved.',
+                'privacy-link': 'Privacy Policy',
+                'terms-link': 'Terms of Use',
+                'notice-link': 'Notices'
+            }
+        };
+
+        let currentLang = 'el';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'el' ? 'en' : 'el';
+            document.documentElement.lang = currentLang;
+            
+            const trans = translations[currentLang];
+            for (const [id, text] of Object.entries(trans)) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = text;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

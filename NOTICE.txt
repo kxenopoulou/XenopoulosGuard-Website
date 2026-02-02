@@ -1,0 +1,42 @@
+XenopoulosGuard-Website
+Copyright (c) 2026 K. Xenopoulos
+
+This product includes software developed by K. Xenopoulos.
+
+NOTICES AND INFORMATION
+=======================
+
+This software is inspired by the philosophical work and legacy of 
+Epameinondas Xenopoulos, a Greek philosopher whose ideas about paradoxes 
+and logical reasoning have influenced this project.
+
+THIRD-PARTY COMPONENTS
+======================
+
+This project may include references to third-party services:
+
+1. PayPal SDK
+   - Used for payment processing
+   - Subject to PayPal's Terms of Service
+   - https://www.paypal.com/
+
+2. ORCID
+   - Used for researcher identification
+   - Subject to ORCID's Terms of Use
+   - https://orcid.org/
+
+ATTRIBUTION
+===========
+
+The philosophical foundation of this work draws from Greek philosophical 
+traditions and the concept of paradox detection in logical systems.
+
+For more information about this project, please visit:
+https://github.com/kxenopoulou/XenopoulosGuard-Website
+
+CONTACT
+=======
+
+For questions or concerns about this project, please refer to the 
+repository issues page or contact the maintainer through the provided 
+channels.
