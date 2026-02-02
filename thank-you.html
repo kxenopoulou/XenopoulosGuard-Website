@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ευχαριστούμε για την υποστήριξή σας στο XenopoulosGuard">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <title>Ευχαριστούμε - XenopoulosGuard</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .card {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #4CAF50;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .lang-toggle:hover {
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-toggle" onclick="toggleLanguage()">
+        <span id="lang-btn">EN</span>
+    </div>
+    
+    <div class="container">
+        <div class="card">
+            <div class="success-icon">✓</div>
+            <h1 id="title">Ευχαριστούμε!</h1>
+            <p id="message1">Η υποστήριξή σας είναι πολύτιμη για την ανάπτυξη του XenopoulosGuard.</p>
+            <p id="message2">Η συνεισφορά σας μας βοηθά να συνεχίσουμε να καινοτομούμε και να βελτιώνουμε το εργαλείο μας.</p>
+            <p id="message3"><strong>Θα λάβετε email επιβεβαίωσης σύντομα.</strong></p>
+            <a href="index.html" class="btn" id="back-btn">Επιστροφή στην Αρχική</a>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            el: {
+                'lang-btn': 'EN',
+                'title': 'Ευχαριστούμε!',
+                'message1': 'Η υποστήριξή σας είναι πολύτιμη για την ανάπτυξη του XenopoulosGuard.',
+                'message2': 'Η συνεισφορά σας μας βοηθά να συνεχίσουμε να καινοτομούμε και να βελτιώνουμε το εργαλείο μας.',
+                'message3': 'Θα λάβετε email επιβεβαίωσης σύντομα.',
+                'back-btn': 'Επιστροφή στην Αρχική'
+            },
+            en: {
+                'lang-btn': 'ΕΛ',
+                'title': 'Thank You!',
+                'message1': 'Your support is invaluable for the development of XenopoulosGuard.',
+                'message2': 'Your contribution helps us continue to innovate and improve our tool.',
+                'message3': 'You will receive a confirmation email shortly.',
+                'back-btn': 'Back to Home'
+            }
+        };
+
+        let currentLang = 'el';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'el' ? 'en' : 'el';
+            document.documentElement.lang = currentLang;
+            
+            const trans = translations[currentLang];
+            for (const [id, text] of Object.entries(trans)) {
+                const element = document.getElementById(id);
+                if (element) {
+                    if (id === 'message3') {
+                        element.innerHTML = '<strong>' + text + '</strong>';
+                    } else {
+                        element.textContent = text;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
